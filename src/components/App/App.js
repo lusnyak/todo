@@ -15,19 +15,21 @@ export default class App extends Component {
     ];
 
     state = {
-        todoList: this.tododata
+        todoList: this.tododata,
+        list: this.tododata 
     }
      
     changeAction = (id) => {
         this.setState(({todoList}) => {
             const updatedList = todoList.map((obj)=>{
-                if (obj.id === id){
+                if (obj.id === id) {
                     obj.important = !obj.important
                 }
                 return obj
             })
             return {
-                todoList: updatedList
+                todoList: updatedList,
+                list: updatedList
             }
         })
     }
@@ -39,7 +41,8 @@ export default class App extends Component {
             })
 
             return {
-                todoList: updatedList
+                todoList: updatedList,
+                list: updatedList
             }
         })
     }
@@ -53,21 +56,53 @@ export default class App extends Component {
                 return obj
             })
             return {
-                todoList: updatedList
+                todoList: updatedList,
+                list: updatedList
             }
         })
     }
 
     searchValue = (text) => {
-        console.log(text);
-        // this.setState(({todoList}) => {
-        //     for (const list of todoList) {
+        if (text === '') {
+            this.setState(({list})=>{
+                return {
+                    todoList: list,
+                }
+            })
+        }
 
-        //     }
-        //     return {
-        //         todoList: updatedList
-        //     }
-        // })
+        this.setState(({todoList}) => {
+            const updatedList = todoList.filter((obj)=>{
+                return obj.name.includes(text)
+            })
+            // for (const obj of todoList) {
+            //     if (obj.name.includes(text)){
+
+            //     }
+            // }
+            return {
+                todoList: updatedList,
+            }
+        })
+    }
+
+    filter = (type) => {        
+        const {list} = this.state
+        let updatedList = list
+        if (type === "done"){
+            updatedList = list.filter((obj)=> {
+                return obj.done === true
+            })
+        } else {
+            updatedList = list.filter((obj)=> {
+                return obj.important === true
+            })
+        }        
+        this.setState(()=>{
+            return {
+                todoList: updatedList,
+            }
+        })
     }
 
     render() {
@@ -75,7 +110,8 @@ export default class App extends Component {
         return (
             <div>
                 <Search 
-                    searchToDoData={this.searchValue}/>
+                    searchToDoData={(text)=>this.searchValue(text)}
+                    filterToDoData={(type)=>this.filter(type)}/>
                 <List 
                     items={todoList} 
                     changeItemData={(id) => this.changeAction(id)} 

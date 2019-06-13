@@ -6,17 +6,30 @@ export default class Search extends Component {
         this.props.searchToDoData(target.value)
     }
 
+    fillerValue = (t) => {
+        this.props.filterToDoData(t)
+    }
+
     render(){
         return (
             <>
                 <div className="form-group w-25 d-inline-block ml-2 mr-2 mt-2">
-                    <input className="form-control" 
+                    <input 
+                        className="form-control" 
                         type="search" 
                         placeholder='Search...'
                         onChange={this.changeValue} />
                 </div>
-                <button className="btn btn-danger">Important</button>
-                <button className="btn btn-info">Done</button>
+                <button 
+                    className="btn btn-danger"
+                    onClick={() => this.fillerValue("important")}>
+                    Important
+                </button>
+                <button 
+                    className="btn btn-info"
+                    onClick={() => this.fillerValue("done")}>
+                    Done
+                </button>
             </>
         )
     }
