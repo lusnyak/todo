@@ -39,20 +39,48 @@ export default class App extends Component {
             })
 
             return {
-                todoList: a
+                todoList: updatedList
             }
         })
+    }
+
+    doneItem = (id) => {
+        this.setState(({todoList}) => {
+            const updatedList = todoList.map((obj)=>{
+                if (obj.id === id){
+                    obj.done = !obj.done
+                }
+                return obj
+            })
+            return {
+                todoList: updatedList
+            }
+        })
+    }
+
+    searchValue = (text) => {
+        console.log(text);
+        // this.setState(({todoList}) => {
+        //     for (const list of todoList) {
+
+        //     }
+        //     return {
+        //         todoList: updatedList
+        //     }
+        // })
     }
 
     render() {
         let {todoList} = this.state
         return (
             <div>
-                <Search/>
+                <Search 
+                    searchToDoData={this.searchValue}/>
                 <List 
                     items={todoList} 
                     changeItemData={(id) => this.changeAction(id)} 
-                    removeItemData={(id) => this.removeItem(id)}/>
+                    removeItemData={(id) => this.removeItem(id)}
+                    doneItemData={(id)=>this.doneItem(id)}/>
                 <Btn/>
             </div>
         )

@@ -13,6 +13,10 @@ export default class ListItems extends Component{
         this.props.remove(id)
     }
 
+    toDone = (id) => {
+        this.props.changeDone(id)
+    }
+
     render() {
         const {items} = this.props;
         const itemList = items.map(({name, important, id, done}) => {
@@ -23,7 +27,9 @@ export default class ListItems extends Component{
             // className="btn btn-default" 
             return  (
                 <Fragment key={id}>
-                    <span style={imStyle}>{name}</span>
+                    <span style={imStyle} onClick={()=>{this.toDone(id)}}>
+                     {name}
+                    </span>
                     <button className="btn btn-danger"
                             onClick={() => this.removeItem(id)}>
                         <i className="fa fa-remove"/>
