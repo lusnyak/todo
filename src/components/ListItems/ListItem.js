@@ -8,8 +8,9 @@ export default class ListItems extends Component{
         this.props.change(id)
     }
 
-    removeItem(id) {
-        console.log("remove" + id);
+    removeItem = (id) => {
+        // console.log("remove" + id);
+        this.props.remove(id)
     }
 
     render() {

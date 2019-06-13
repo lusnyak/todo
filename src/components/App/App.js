@@ -32,6 +32,18 @@ export default class App extends Component {
         })
     }
 
+    deleteItem = (id) => {
+        this.setState(({todoList}) => {
+            const updatedList = todoList.filter((obj)=>{
+                return obj.id !== id
+            })
+
+            return {
+                todoList: a
+            }
+        })
+    }
+
     render() {
         let {todoList} = this.state
         return (
@@ -39,7 +51,8 @@ export default class App extends Component {
                 <Search/>
                 <List 
                     items={todoList} 
-                    changeItemData={(id) => this.changeAction(id)} />
+                    changeItemData={(id) => this.changeAction(id)} 
+                    removeItemData={(id) => this.removeItem(id)}/>
                 <Btn/>
             </div>
         )
