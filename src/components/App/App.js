@@ -79,7 +79,7 @@ export default class App extends Component {
                 <List 
                     items={todoList} 
                     changeItemData={(id) => this.changeAction(id)} 
-                    removeItemData={(id) => this.removeItem(id)}
+                    removeItemData={(id) => this.deleteItem(id)}
                     doneItemData={(id)=>this.doneItem(id)}/>
                 <Btn/>
             </div>
