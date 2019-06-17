@@ -3,21 +3,34 @@ import './AddItem.css';
 
 export default class AddItem extends Component {
 
-    addItemAction = (value) => {
-        console.log(value)
+    state = {
+        text: ''
     }
+
+    inputChange = (e) => {
+        this.setState({
+            text: e.target.value
+        })
+    }
+
+    formOnSubmit = (e) => {
+        e.preventDefault()
+        this.props.addItem(this.state.text)
+    }
+
     render() {
         return (
-            <>
+            <form onSubmit={this.formOnSubmit}>
                 <div className="form-group w-25 d-inline-block ml-2 mr-2">
-                    <input type="text" className="form-control"/>
+                    <input type="text" 
+                        className="form-control"
+                        onChange={this.inputChange}/>
                 </div>
                 <button 
-                    className="btn btn-danger"
-                    onClick={()=>this.addItemAction('hello')}>
+                    className="btn btn-danger">
                         Add list
                 </button>
-            </>
+            </form>
             
         )
     }

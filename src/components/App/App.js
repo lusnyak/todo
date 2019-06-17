@@ -105,8 +105,20 @@ export default class App extends Component {
         })
     }
 
+    addItemData = (text) => {
+        this.setState(({todoList})=>{
+            const updatedList = todoList;
+            const newId = updatedList.length ? updatedList[updatedList.length - 1].id + 1 : 1
+            const item = {name: text, important: false, done: false, id: newId}
+            updatedList.push(item)
+            return {
+                todoList: updatedList
+            }
+        })
+    }
+
     render() {
-        let {todoList} = this.state
+        const {todoList} = this.state
         return (
             <div>
                 <Search 
@@ -117,7 +129,7 @@ export default class App extends Component {
                     changeItemData={(id) => this.changeAction(id)} 
                     removeItemData={(id) => this.deleteItem(id)}
                     doneItemData={(id)=>this.doneItem(id)}/>
-                <Btn/>
+                <Btn addItem={this.addItemData}/>
             </div>
         )
     }
