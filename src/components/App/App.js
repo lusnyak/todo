@@ -75,11 +75,6 @@ export default class App extends Component {
             const updatedList = todoList.filter((obj)=>{
                 return obj.name.includes(text)
             })
-            // for (const obj of todoList) {
-            //     if (obj.name.includes(text)){
-
-            //     }
-            // }
             return {
                 todoList: updatedList,
             }
